@@ -26,9 +26,11 @@ Route::get('/post',"PostController@mostrar");
 Route::post('/inser',"PostController@insertar");
 Route::delete('/eliminar/{id}',"PostController@eliminar");
 Route::put('/actualizar/{id}',"PostController@update");
+Route::get('/coment/{id}',"PostController@VerComen");
 
 Route::get('/coments',"ComentarioController@ver");
 Route::post('/insertar',"ComentarioController@poner");
 Route::delete('/eli/{id}',"ComentarioController@quitar");
 Route::put('/actu/{id}',"ComentarioController@mejorar");
+
 

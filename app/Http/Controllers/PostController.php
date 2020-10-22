@@ -31,4 +31,9 @@ class PostController extends Controller
     $actu->save();
     return response()->json(200);
     }
+    public function VerComen($id)
+    {
+        $resultado=Post::join('comentarios','comentarios.post_id','=','posts.id')->select('comentarios.*')->where('posts.id','=',$id)->get();
+        return response()->json($resultado,200);
+    }
 }
