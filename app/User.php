@@ -8,9 +8,14 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    use HasApiTokens, Notifiable;
     public function posts()
     {
         return $this->hasMany('App\post');
+    }
+    public function personas()
+    {
+        return $this->belongsTo('App\personas');
     }
     use Notifiable;
 

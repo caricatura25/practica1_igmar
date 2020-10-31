@@ -7,25 +7,25 @@ use App\comentarios;
 
 class ComentarioController extends Controller
 {
-    public function ver()
+    public function mostrar()
     {
         return comentarios::all();
     }
-    public function poner(Request $r)
+    public function insertar(Request $r)
     {
         $comen=comentarios::create($r->all());
       return $comen;  
     }
-    public function quitar($id)
+    public function eliminar($id)
     {
         $delete=comentarios::find($id);
         $delete->delete();
         return response()->json(200);
     }
-    public function mejorar($id)
+    public function update(Request $refresh, $id)
     {
         $actu = comentarios::find($id);
-    $actu->contenido = ' ';
+    $actu->contenido = $refresh ->input('contenido');
     $actu->save();
     return response()->json(200);
     }

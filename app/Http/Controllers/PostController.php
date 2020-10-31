@@ -23,15 +23,15 @@ class PostController extends Controller
 
         return response()->json(200);
     }
-    public function update($id)
+    public function update(Request $refresh, $id)
     {
         $actu = Post::find($id);
-    $actu->titulo = 'pandemia';
-    $actu->contenido = 'virus';
+    $actu->titulo = $refresh ->input('titulo');
+    $actu->contenido = $refresh ->input('contenido');
     $actu->save();
     return response()->json(200);
     }
-    public function VerComen($id)
+    public function VerComentarios($id)
     {
         $resultado=Post::join('comentarios','comentarios.post_id','=','posts.id')->select('comentarios.*')->where('posts.id','=',$id)->get();
         return response()->json($resultado,200);

@@ -17,20 +17,26 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/persona',"users@mostrar");
-Route::post('/registro', "users@store");
-Route::delete('/delete/{id}',"users@eliminar");
-Route::put('/actualizar/{id}',"users@update");
+Route::get('/usuario',"users@mostrar");
+Route::post('/usuario', "users@insertar");
+Route::delete('/usuario/{id}',"users@eliminar");
+Route::put('/usuario/{id}',"users@update");
 
 Route::get('/post',"PostController@mostrar");
-Route::post('/inser',"PostController@insertar");
-Route::delete('/eliminar/{id}',"PostController@eliminar");
-Route::put('/actualizar/{id}',"PostController@update");
-Route::get('/coment/{id}',"PostController@VerComen");
+Route::post('/post',"PostController@insertar");
+Route::delete('/post/{id}',"PostController@eliminar");
+Route::put('/post/{id}',"PostController@update");
+Route::get('/post/{id}',"PostController@VerComentarios");
 
-Route::get('/coments',"ComentarioController@ver");
-Route::post('/insertar',"ComentarioController@poner");
-Route::delete('/eli/{id}',"ComentarioController@quitar");
-Route::put('/actu/{id}',"ComentarioController@mejorar");
+Route::get('/comentarios',"ComentarioController@mostrar");
+Route::post('/comentarios',"ComentarioController@insertar");
+Route::delete('/comentarios/{id}',"ComentarioController@eliminar");
+Route::put('/comentarios/{id}',"ComentarioController@update");
+
+Route::get('/persona',"PersonasController@mostrar")->middleware('verificaedad');
+Route::post('/persona',"PersonasController@insertar")->middleware('verificaedad');
+Route::delete('/persona/{id}',"PersonasController@eliminar");
+Route::put('/persona/{id}',"PersonasController@update");
+Route::post('/person',"PersonasController@registroT");
 
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class users extends Controller
 {
@@ -11,22 +12,28 @@ class users extends Controller
     {
         return User::all();
     }
-    public function store(Request $r)
+    public function insertar(Request $r)
     {
-        $usuario=User::create($r->all());
-      return $usuario;  
+        $insertar=new User();
+        $insertar->persona_id = $r ->input('persona_id');
+        $insertar->name = $r ->input('name');
+        $insertar->email = $r ->input('email');
+        $insertar->password = Hash::make($r -> input('password'));
+        $insertar->save();
+        return response()->json($r,200);  
     }
     public function eliminar($id)
     {
         $delete=User::find($id);
         $delete->delete();
-
         return response()->json(200);
     }
-    public function update($id)
+    public function update(Request $refresh, $id)
     {
-        $actu = User::find($id);
-    $actu->name = 'enrique';
+    $actu = User::find($id);
+    $actu->name = $refresh ->input('name');
+    $actu->email = $refresh ->input('email');
+    $actu->password = Hash::make($refresh -> input('password'));
     $actu->save();
     return response()->json(200);
     }
